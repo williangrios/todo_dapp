@@ -30,12 +30,13 @@ contract TaskContract {
         }
     }
 
-    function getMyTasks(uint taskId) external view returns (Task[] memory){
+    function getMyTasks() external view returns (Task[] memory){
         Task[] memory temporary = new Task[](tasks.length);
         uint counter = 0;
         for(uint i =0 ; i<tasks.length;  i++){
             if(taskToOwner[i] == msg.sender && tasks[i].isDeleted == false){
                 temporary[counter] = tasks[i];
+                counter++;
             }
         }
         Task[] memory result = new Task[](counter);
